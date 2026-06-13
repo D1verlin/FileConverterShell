@@ -1,0 +1,206 @@
+{
+  "presets": {
+
+    "vid-mp4-hq": {
+      "category": "video",
+      "label": "MP4 — High Quality (H.264)",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "18", "-preset", "p6", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart"]
+    },
+    "vid-mp4-web": {
+      "category": "video",
+      "label": "MP4 — Web Optimized (H.264)",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "23", "-preset", "p4", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart"]
+    },
+    "vid-mp4-small": {
+      "category": "video",
+      "label": "MP4 — Compressed (H.264)",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "28", "-preset", "p2", "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart"]
+    },
+    "vid-mp4-265": {
+      "category": "video",
+      "label": "MP4 — HEVC (H.265, GPU Accelerated)",
+      "ext": "mp4",
+      "args": ["-c:v", "hevc_nvenc", "-rc", "vbr", "-cq", "24", "-preset", "p4", "-c:a", "aac", "-b:a", "128k", "-tag:v", "hvc1"]
+    },
+    "vid-webm": {
+      "category": "video",
+      "label": "WebM — VP9",
+      "ext": "webm",
+      "args": ["-c:v", "libvpx-vp9", "-crf", "30", "-b:v", "0", "-c:a", "libopus", "-b:a", "128k"]
+    },
+    "vid-avi": {
+      "category": "video",
+      "label": "AVI — Windows Compatible",
+      "ext": "avi",
+      "args": ["-c:v", "mpeg4", "-q:v", "6", "-c:a", "mp3", "-b:a", "128k"]
+    },
+    "vid-mkv": {
+      "category": "video",
+      "label": "MKV — Lossless Copy",
+      "ext": "mkv",
+      "args": ["-c", "copy"]
+    },
+    "vid-mov": {
+      "category": "video",
+      "label": "MOV — QuickTime",
+      "ext": "mov",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "20", "-preset", "p4", "-c:a", "aac", "-b:a", "192k"]
+    },
+    "vid-gif": {
+      "category": "video",
+      "label": "Animated GIF",
+      "ext": "gif",
+      "args": ["-vf", "fps=15,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse", "-loop", "0"]
+    },
+    "vid-extract-audio": {
+      "category": "video",
+      "label": "Extract Audio → MP3",
+      "ext": "mp3",
+      "args": ["-vn", "-c:a", "libmp3lame", "-b:a", "320k"]
+    },
+
+    "aud-mp3-hq": {
+      "category": "audio",
+      "label": "MP3 — High Quality (320 kbps)",
+      "ext": "mp3",
+      "args": ["-c:a", "libmp3lame", "-b:a", "320k", "-q:a", "0"]
+    },
+    "aud-mp3-std": {
+      "category": "audio",
+      "label": "MP3 — Standard (192 kbps)",
+      "ext": "mp3",
+      "args": ["-c:a", "libmp3lame", "-b:a", "192k"]
+    },
+    "aud-mp3-small": {
+      "category": "audio",
+      "label": "MP3 — Compressed (128 kbps)",
+      "ext": "mp3",
+      "args": ["-c:a", "libmp3lame", "-b:a", "128k"]
+    },
+    "aud-aac": {
+      "category": "audio",
+      "label": "AAC — 256 kbps (Apple/mobile)",
+      "ext": "m4a",
+      "args": ["-c:a", "aac", "-b:a", "256k", "-vn"]
+    },
+    "aud-flac": {
+      "category": "audio",
+      "label": "FLAC — Lossless",
+      "ext": "flac",
+      "args": ["-c:a", "flac", "-compression_level", "8", "-vn"]
+    },
+    "aud-wav": {
+      "category": "audio",
+      "label": "WAV — PCM 16-bit",
+      "ext": "wav",
+      "args": ["-c:a", "pcm_s16le", "-vn"]
+    },
+    "aud-ogg": {
+      "category": "audio",
+      "label": "OGG — Vorbis",
+      "ext": "ogg",
+      "args": ["-c:a", "libvorbis", "-q:a", "6", "-vn"]
+    },
+    "aud-opus": {
+      "category": "audio",
+      "label": "Opus — Streaming (128 kbps)",
+      "ext": "opus",
+      "args": ["-c:a", "libopus", "-b:a", "128k", "-vn"]
+    },
+    "aud-wma": {
+      "category": "audio",
+      "label": "WMA — Windows Media Audio",
+      "ext": "wma",
+      "args": ["-c:a", "wmav2", "-b:a", "192k", "-vn"]
+    },
+
+    "img-jpg-hq": {
+      "category": "image",
+      "label": "JPEG — High Quality (95%)",
+      "ext": "jpg",
+      "args": ["-q:v", "2"]
+    },
+    "img-jpg-web": {
+      "category": "image",
+      "label": "JPEG — Web (80%)",
+      "ext": "jpg",
+      "args": ["-q:v", "5"]
+    },
+    "img-jpg-small": {
+      "category": "image",
+      "label": "JPEG — Small (60%)",
+      "ext": "jpg",
+      "args": ["-q:v", "10"]
+    },
+    "img-png": {
+      "category": "image",
+      "label": "PNG — Lossless",
+      "ext": "png",
+      "args": ["-compression_level", "9"]
+    },
+    "img-webp": {
+      "category": "image",
+      "label": "WebP — Lossy (quality 85)",
+      "ext": "webp",
+      "args": ["-quality", "85"]
+    },
+    "img-webp-lossless": {
+      "category": "image",
+      "label": "WebP — Lossless",
+      "ext": "webp",
+      "args": ["-lossless", "1"]
+    },
+    "img-avif": {
+      "category": "image",
+      "label": "AVIF — Modern (quality 60)",
+      "ext": "avif",
+      "args": ["-c:v", "libaom-av1", "-crf", "30", "-still-picture", "1"]
+    },
+    "img-bmp": {
+      "category": "image",
+      "label": "BMP — Bitmap",
+      "ext": "bmp",
+      "args": []
+    },
+    "img-tiff": {
+      "category": "image",
+      "label": "TIFF — Lossless",
+      "ext": "tiff",
+      "args": ["-compression_algo", "lzw"]
+    },
+    "img-ico": {
+      "category": "image",
+      "label": "ICO — Windows Icon (256x256)",
+      "ext": "ico",
+      "args": ["-vf", "scale=256:256:force_original_aspect_ratio=decrease"]
+    },
+    "img-resize-hd": {
+      "category": "image",
+      "label": "JPEG — Resize to HD (1920px max)",
+      "ext": "jpg",
+      "args": ["-vf", "scale=min(1920\\,iw):min(1080\\,ih):force_original_aspect_ratio=decrease", "-q:v", "3"]
+    },
+    "img-resize-4k": {
+      "category": "image",
+      "label": "JPEG — Resize to 4K (3840px max)",
+      "ext": "jpg",
+      "args": ["-vf", "scale=min(3840\\,iw):min(2160\\,ih):force_original_aspect_ratio=decrease", "-q:v", "2"]
+    },
+    "img-resize-thumb": {
+      "category": "image",
+      "label": "JPEG — Thumbnail (320x240)",
+      "ext": "jpg",
+      "args": ["-vf", "scale=320:240:force_original_aspect_ratio=decrease", "-q:v", "5"]
+    },
+    "img-resize-square": {
+      "category": "image",
+      "label": "JPEG — Square Crop (512x512)",
+      "ext": "jpg",
+      "args": ["-vf", "crop=min(iw\\,ih):min(iw\\,ih),scale=512:512", "-q:v", "3"]
+    }
+
+  }
+}
