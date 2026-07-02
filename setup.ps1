@@ -162,19 +162,24 @@ if (-not (Test-Path $ConvertScript)) {
 }
 Write-OK 'convert.ps1 found.'
 
-# ─── Step 4: Copy file-converter.nss to NileSoft Shell imports ───────────────
+# ─── Step 4: Copy and patch file-converter.nss to NileSoft Shell imports ─────
 
-Write-Step 'Installing file-converter.nss into NileSoft Shell...'
+Write-Step 'Installing and patching file-converter.nss into NileSoft Shell...'
 
 if (-not (Test-Path $LocalNss)) {
     Abort "Local file-converter.nss not found at: $LocalNss"
 }
 
 try {
-    Copy-Item -Path $LocalNss -Destination $NilesoftImport -Force
-    Write-OK "Copied to: $NilesoftImport"
+    # Dynamically patch the script path so it points to the user's current directory
+    $ActualConvertPath = (Join-Path $ScriptDir 'convert.ps1').Replace('\', '/')
+    $NssContent = Get-Content $LocalNss -Raw
+    $PatchedNssContent = $NssContent -replace '(?<=-File ")[^"]*convert\.ps1', $ActualConvertPath
+    
+    Set-Content -Path $NilesoftImport -Value $PatchedNssContent -Encoding UTF8
+    Write-OK "Installed and patched: $NilesoftImport (pointing to $ActualConvertPath)"
 } catch {
-    Abort "Failed to copy file-converter.nss (you may need to run as Administrator): $_"
+    Abort "Failed to install/patch file-converter.nss (you may need to run as Administrator): $_"
 }
 
 # ─── Step 5: Add import line to shell.nss ─────────────────────────────────────

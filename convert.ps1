@@ -119,7 +119,7 @@ foreach ($SrcPath in $AllFiles) {
 
     Write-Log "Converting [$i/$($AllFiles.Count)]: $SrcPath -> $DstPath"
 
-    $CmdArgs = @('-y', '-threads', $ThreadCount.ToString(), '-i', $SrcPath) + $ExtraArgs + @($DstPath)
+    $CmdArgs = @('-y', '-threads', $ThreadCount.ToString(), '-i', "`"$SrcPath`"") + $ExtraArgs + @("`"$DstPath`"")
     Write-Log "ffmpeg args: $($CmdArgs -join ' ')"
 
     try {
@@ -136,7 +136,7 @@ foreach ($SrcPath in $AllFiles) {
             $errTxt = if (Test-Path $ErrFile) { Get-Content $ErrFile -Raw } else { '' }
             
             # If the error is due to NVENC or missing/outdated GPU driver, fall back to CPU
-            if ($errTxt -match 'driver|nvenc|function not implemented|no nvenc' -and ($ExtraArgs -contains 'h264_nvenc' -or $ExtraArgs -contains 'hevc_nvenc')) {
+            if ($errTxt -match 'driver|nvenc|function not implemented|no nvenc|not supported|failed to create' -and ($ExtraArgs -contains 'h264_nvenc' -or $ExtraArgs -contains 'hevc_nvenc' -or $ExtraArgs -contains 'av1_nvenc')) {
                 Write-Log "GPU encoder failed due to driver/hardware limitations. Retrying with CPU (fallback)..."
                 
                 $CpuArgs = @()
@@ -147,6 +147,9 @@ foreach ($SrcPath in $AllFiles) {
                     elseif ($ExtraArgs[$j] -eq 'hevc_nvenc') {
                         $CpuArgs += 'libx265'
                     }
+                    elseif ($ExtraArgs[$j] -eq 'av1_nvenc') {
+                        $CpuArgs += 'libsvtav1'
+                    }
                     elseif ($ExtraArgs[$j] -eq '-rc' -and $ExtraArgs[$j+1] -eq 'vbr') {
                         $j++ # Skip '-rc vbr'
                     }
@@ -156,9 +159,16 @@ foreach ($SrcPath in $AllFiles) {
                     elseif ($ExtraArgs[$j] -eq '-preset' -and $ExtraArgs[$j+1] -like 'p*') {
                         # Map NVENC p1-p7 presets to CPU presets
                         $nvPreset = $ExtraArgs[$j+1]
-                        $cpuPreset = 'medium'
-                        if ($nvPreset -eq 'p1' -or $nvPreset -eq 'p2') { $cpuPreset = 'fast' }
-                        elseif ($nvPreset -eq 'p5' -or $nvPreset -eq 'p6' -or $nvPreset -eq 'p7') { $cpuPreset = 'slow' }
+                        $isAv1 = $CpuArgs -contains 'libsvtav1'
+                        if ($isAv1) {
+                            $cpuPreset = '6'
+                            if ($nvPreset -eq 'p1' -or $nvPreset -eq 'p2') { $cpuPreset = '8' }
+                            elseif ($nvPreset -eq 'p5' -or $nvPreset -eq 'p6' -or $nvPreset -eq 'p7') { $cpuPreset = '4' }
+                        } else {
+                            $cpuPreset = 'medium'
+                            if ($nvPreset -eq 'p1' -or $nvPreset -eq 'p2') { $cpuPreset = 'fast' }
+                            elseif ($nvPreset -eq 'p5' -or $nvPreset -eq 'p6' -or $nvPreset -eq 'p7') { $cpuPreset = 'slow' }
+                        }
                         $CpuArgs += @('-preset', $cpuPreset)
                         $j++
                     }
@@ -167,7 +177,7 @@ foreach ($SrcPath in $AllFiles) {
                     }
                 }
                 
-                $CmdArgs = @('-y', '-threads', $ThreadCount.ToString(), '-i', $SrcPath) + $CpuArgs + @($DstPath)
+                $CmdArgs = @('-y', '-threads', $ThreadCount.ToString(), '-i', "`"$SrcPath`"") + $CpuArgs + @("`"$DstPath`"")
                 Write-Log "Retrying with CPU arguments: $($CmdArgs -join ' ')"
                 
                 $p = Start-Process -FilePath $FfmpegPath `

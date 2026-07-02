@@ -25,11 +25,29 @@
       "ext": "mp4",
       "args": ["-c:v", "hevc_nvenc", "-rc", "vbr", "-cq", "24", "-preset", "p4", "-c:a", "aac", "-b:a", "128k", "-tag:v", "hvc1"]
     },
+    "vid-mp4-av1": {
+      "category": "video",
+      "label": "MP4 — AV1 (Next-Gen, GPU/CPU)",
+      "ext": "mp4",
+      "args": ["-c:v", "av1_nvenc", "-rc", "vbr", "-cq", "28", "-preset", "p4", "-c:a", "libopus", "-b:a", "128k"]
+    },
+    "vid-mp4-cpu": {
+      "category": "video",
+      "label": "MP4 — H.264 (CPU Only)",
+      "ext": "mp4",
+      "args": ["-c:v", "libx264", "-crf", "20", "-preset", "medium", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart"]
+    },
     "vid-webm": {
       "category": "video",
       "label": "WebM — VP9",
       "ext": "webm",
       "args": ["-c:v", "libvpx-vp9", "-crf", "30", "-b:v", "0", "-c:a", "libopus", "-b:a", "128k"]
+    },
+    "vid-webm-av1": {
+      "category": "video",
+      "label": "WebM — AV1 (libsvtav1)",
+      "ext": "webm",
+      "args": ["-c:v", "libsvtav1", "-crf", "30", "-preset", "6", "-c:a", "libopus", "-b:a", "128k"]
     },
     "vid-avi": {
       "category": "video",
@@ -55,11 +73,113 @@
       "ext": "gif",
       "args": ["-vf", "fps=15,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse", "-loop", "0"]
     },
+    "vid-compress-discord-8mb": {
+      "category": "video",
+      "label": "Compress for Discord (under 8MB)",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "30", "-preset", "p4", "-maxrate", "800k", "-bufsize", "1600k", "-c:a", "aac", "-b:a", "64k", "-fs", "8M"]
+    },
+    "vid-compress-discord-25mb": {
+      "category": "video",
+      "label": "Compress for Discord (under 25MB)",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "26", "-preset", "p4", "-maxrate", "2500k", "-bufsize", "5000k", "-c:a", "aac", "-b:a", "96k", "-fs", "25M"]
+    },
+    "vid-resize-1080p": {
+      "category": "video",
+      "label": "Resize to 1080p (Full HD)",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "20", "-preset", "p4", "-vf", "scale=-2:1080:flags=lanczos", "-c:a", "aac", "-b:a", "128k"]
+    },
+    "vid-resize-720p": {
+      "category": "video",
+      "label": "Resize to 720p (HD)",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "22", "-preset", "p4", "-vf", "scale=-2:720:flags=lanczos", "-c:a", "aac", "-b:a", "128k"]
+    },
+    "vid-resize-480p": {
+      "category": "video",
+      "label": "Resize to 480p (SD)",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "24", "-preset", "p4", "-vf", "scale=-2:480:flags=lanczos", "-c:a", "aac", "-b:a", "96k"]
+    },
+    "vid-rotate-90-cw": {
+      "category": "video",
+      "label": "Rotate 90° Clockwise",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "20", "-preset", "p4", "-vf", "transpose=1", "-c:a", "copy"]
+    },
+    "vid-rotate-90-ccw": {
+      "category": "video",
+      "label": "Rotate 90° Counter-Clockwise",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "20", "-preset", "p4", "-vf", "transpose=2", "-c:a", "copy"]
+    },
+    "vid-rotate-180": {
+      "category": "video",
+      "label": "Rotate 180°",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "20", "-preset", "p4", "-vf", "transpose=2,transpose=2", "-c:a", "copy"]
+    },
+    "vid-flip-h": {
+      "category": "video",
+      "label": "Flip Horizontally",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "20", "-preset", "p4", "-vf", "hflip", "-c:a", "copy"]
+    },
+    "vid-flip-v": {
+      "category": "video",
+      "label": "Flip Vertically",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "20", "-preset", "p4", "-vf", "vflip", "-c:a", "copy"]
+    },
+    "vid-speed-2x": {
+      "category": "video",
+      "label": "Speed Up 2x",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "20", "-preset", "p4", "-vf", "setpts=0.5*PTS", "-filter:a", "atempo=2.0"]
+    },
+    "vid-speed-05x": {
+      "category": "video",
+      "label": "Slow Down 0.5x",
+      "ext": "mp4",
+      "args": ["-c:v", "h264_nvenc", "-rc", "vbr", "-cq", "20", "-preset", "p4", "-vf", "setpts=2.0*PTS", "-filter:a", "atempo=0.5"]
+    },
+    "vid-mute": {
+      "category": "video",
+      "label": "Mute Video (Remove Audio)",
+      "ext": "mp4",
+      "args": ["-c:v", "copy", "-an"]
+    },
     "vid-extract-audio": {
       "category": "video",
       "label": "Extract Audio → MP3",
       "ext": "mp3",
       "args": ["-vn", "-c:a", "libmp3lame", "-b:a", "320k"]
+    },
+    "vid-extract-wav": {
+      "category": "video",
+      "label": "Extract Audio → WAV",
+      "ext": "wav",
+      "args": ["-vn", "-c:a", "pcm_s16le"]
+    },
+    "vid-extract-flac": {
+      "category": "video",
+      "label": "Extract Audio → FLAC",
+      "ext": "flac",
+      "args": ["-vn", "-c:a", "flac"]
+    },
+    "vid-extract-m4a": {
+      "category": "video",
+      "label": "Extract Audio → AAC (M4A)",
+      "ext": "m4a",
+      "args": ["-vn", "-c:a", "aac", "-b:a", "256k"]
+    },
+    "vid-extract-opus": {
+      "category": "video",
+      "label": "Extract Audio → Opus",
+      "ext": "opus",
+      "args": ["-vn", "-c:a", "libopus", "-b:a", "128k"]
     },
 
     "aud-mp3-hq": {
@@ -86,6 +206,12 @@
       "ext": "m4a",
       "args": ["-c:a", "aac", "-b:a", "256k", "-vn"]
     },
+    "aud-m4a-alac": {
+      "category": "audio",
+      "label": "M4A — ALAC (Apple Lossless)",
+      "ext": "m4a",
+      "args": ["-c:a", "alac", "-vn"]
+    },
     "aud-flac": {
       "category": "audio",
       "label": "FLAC — Lossless",
@@ -97,6 +223,12 @@
       "label": "WAV — PCM 16-bit",
       "ext": "wav",
       "args": ["-c:a", "pcm_s16le", "-vn"]
+    },
+    "aud-wav-24bit": {
+      "category": "audio",
+      "label": "WAV — PCM 24-bit",
+      "ext": "wav",
+      "args": ["-c:a", "pcm_s24le", "-vn"]
     },
     "aud-ogg": {
       "category": "audio",
@@ -115,6 +247,24 @@
       "label": "WMA — Windows Media Audio",
       "ext": "wma",
       "args": ["-c:a", "wmav2", "-b:a", "192k", "-vn"]
+    },
+    "aud-amr": {
+      "category": "audio",
+      "label": "AMR — Voice Quality",
+      "ext": "amr",
+      "args": ["-c:a", "libopencore_amrnb", "-ar", "8000", "-ab", "12.2k", "-ac", "1", "-vn"]
+    },
+    "aud-vol-200": {
+      "category": "audio",
+      "label": "Volume Boost (200%)",
+      "ext": "mp3",
+      "args": ["-c:a", "libmp3lame", "-b:a", "192k", "-filter:a", "volume=2.0", "-vn"]
+    },
+    "aud-vol-50": {
+      "category": "audio",
+      "label": "Volume Reduce (50%)",
+      "ext": "mp3",
+      "args": ["-c:a", "libmp3lame", "-b:a", "192k", "-filter:a", "volume=0.5", "-vn"]
     },
 
     "img-jpg-hq": {
@@ -200,6 +350,42 @@
       "label": "JPEG — Square Crop (512x512)",
       "ext": "jpg",
       "args": ["-vf", "crop=min(iw\\,ih):min(iw\\,ih),scale=512:512", "-q:v", "3"]
+    },
+    "img-grayscale": {
+      "category": "image",
+      "label": "Convert to Grayscale",
+      "ext": "jpg",
+      "args": ["-vf", "format=gray", "-q:v", "2"]
+    },
+    "img-rotate-90-cw": {
+      "category": "image",
+      "label": "Rotate 90° Clockwise",
+      "ext": "jpg",
+      "args": ["-vf", "transpose=1", "-q:v", "2"]
+    },
+    "img-rotate-90-ccw": {
+      "category": "image",
+      "label": "Rotate 90° Counter-Clockwise",
+      "ext": "jpg",
+      "args": ["-vf", "transpose=2", "-q:v", "2"]
+    },
+    "img-rotate-180": {
+      "category": "image",
+      "label": "Rotate 180°",
+      "ext": "jpg",
+      "args": ["-vf", "transpose=2,transpose=2", "-q:v", "2"]
+    },
+    "img-flip-h": {
+      "category": "image",
+      "label": "Flip Horizontally",
+      "ext": "jpg",
+      "args": ["-vf", "hflip", "-q:v", "2"]
+    },
+    "img-flip-v": {
+      "category": "image",
+      "label": "Flip Vertically",
+      "ext": "jpg",
+      "args": ["-vf", "vflip", "-q:v", "2"]
     }
 
   }
