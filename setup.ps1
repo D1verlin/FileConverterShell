@@ -173,7 +173,7 @@ if (-not (Test-Path $LocalNss)) {
 try {
     # Dynamically patch the script path so it points to the user's current directory
     $ActualConvertPath = (Join-Path $ScriptDir 'convert.ps1').Replace('\', '/')
-    $NssContent = Get-Content $LocalNss -Raw
+    $NssContent = Get-Content $LocalNss -Raw -Encoding UTF8
     $PatchedNssContent = $NssContent -replace '(?<=-File ")[^"]*convert\.ps1', $ActualConvertPath
     
     Set-Content -Path $NilesoftImport -Value $PatchedNssContent -Encoding UTF8
