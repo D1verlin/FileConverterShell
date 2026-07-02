@@ -210,16 +210,25 @@ menu(
         item(title='High Quality  (95%)'
              cmd='powershell.exe'
              args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-jpg-hq"')
-        item(title='Web  (80%)'
+        item(title='Web Optimized  (80%)'
              cmd='powershell.exe'
              args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-jpg-web"')
-        item(title='Small  (60%)'
+        item(title='Compressed  (60%)'
              cmd='powershell.exe'
              args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-jpg-small"')
+        item(title='Privacy  (Strip EXIF/Metadata)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-jpg-privacy"')
     }
-    item(title='to PNG  (Lossless)'
-         cmd='powershell.exe'
-         args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-png"')
+    menu(title='to PNG' image=\uE156)
+    {
+        item(title='PNG Lossless'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-png"')
+        item(title='Privacy  (Strip Metadata)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-png-privacy"')
+    }
     menu(title='to WebP' image=\uE156)
     {
         item(title='WebP Lossy  (quality 85)'
@@ -228,6 +237,9 @@ menu(
         item(title='WebP Lossless'
              cmd='powershell.exe'
              args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-webp-lossless"')
+        item(title='WebP Optimized  (quality 75, Strip Metadata)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-webp-optimized"')
     }
     item(title='to AVIF  (modern, efficient)'
          cmd='powershell.exe'
@@ -235,27 +247,48 @@ menu(
     item(title='to BMP'
          cmd='powershell.exe'
          args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-bmp"')
-    item(title='to TIFF  (LZW compressed)'
+    item(title='to Static GIF'
          cmd='powershell.exe'
-         args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-tiff"')
+         args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-gif-static"')
+    item(title='to TGA  (Targa)'
+         cmd='powershell.exe'
+         args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-tga"')
+    menu(title='to TIFF' image=\uE156)
+    {
+        item(title='TIFF Lossless  (LZW compressed)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-tiff"')
+        item(title='TIFF Uncompressed'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-tiff-uncompressed"')
+    }
     item(title='to ICO  (Windows icon, 256 x 256)'
          cmd='powershell.exe'
          args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-ico"')
     separator
     menu(title='Resize Image' image=\uE156)
     {
-        item(title='Resize to HD  (max 1920 px)'
-             cmd='powershell.exe'
-             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-resize-hd"')
         item(title='Resize to 4K  (max 3840 px)'
              cmd='powershell.exe'
              args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-resize-4k"')
+        item(title='Resize to HD  (max 1920 px)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-resize-hd"')
+        item(title='Resize to 720p  (max 1280 px)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-resize-720p"')
+        item(title='Resize to Medium  (max 800 px)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-resize-medium"')
         item(title='Thumbnail  (320 x 240)'
              cmd='powershell.exe'
              args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-resize-thumb"')
         item(title='Square Crop  (512 x 512)'
              cmd='powershell.exe'
              args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-resize-square"')
+        item(title='Avatar  (128 x 128)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-resize-avatar"')
     }
     menu(title='Rotate / Flip Image' image=\uE156)
     {
@@ -276,10 +309,31 @@ menu(
              cmd='powershell.exe'
              args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-flip-v"')
     }
-    menu(title='Effects' image=\uE156)
+    menu(title='Effects & Filters' image=\uE156)
     {
         item(title='Convert to Grayscale'
              cmd='powershell.exe'
              args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-grayscale"')
+        item(title='Invert Colors  (Negative)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-invert"')
+        item(title='Gaussian Blur'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-blur"')
+        item(title='Sharpen'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-sharpen"')
+        item(title='Brighten  (+20%)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-brighten"')
+        item(title='Boost Contrast  (+30%)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-contrast"')
+        item(title='Sepia Filter  (Vintage)'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-sepia"')
+        item(title='Vintage Curves'
+             cmd='powershell.exe'
+             args='-NoProfile -ExecutionPolicy Bypass -File "C:/Users/Lenovo/Desktop/Projects/FileConverter/convert.ps1" -InputPath "@(sel(false, "*"))" -Preset "img-vintage"')
     }
 }

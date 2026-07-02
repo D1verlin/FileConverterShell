@@ -285,11 +285,23 @@
       "ext": "jpg",
       "args": ["-q:v", "10"]
     },
+    "img-jpg-privacy": {
+      "category": "image",
+      "label": "JPEG — Privacy (Strip Metadata)",
+      "ext": "jpg",
+      "args": ["-q:v", "2", "-map_metadata", "-1"]
+    },
     "img-png": {
       "category": "image",
       "label": "PNG — Lossless",
       "ext": "png",
       "args": ["-compression_level", "9"]
+    },
+    "img-png-privacy": {
+      "category": "image",
+      "label": "PNG — Privacy (Strip Metadata)",
+      "ext": "png",
+      "args": ["-compression_level", "9", "-map_metadata", "-1"]
     },
     "img-webp": {
       "category": "image",
@@ -303,6 +315,12 @@
       "ext": "webp",
       "args": ["-lossless", "1"]
     },
+    "img-webp-optimized": {
+      "category": "image",
+      "label": "WebP — Optimized (Strip Metadata)",
+      "ext": "webp",
+      "args": ["-quality", "75", "-map_metadata", "-1"]
+    },
     "img-avif": {
       "category": "image",
       "label": "AVIF — Modern (quality 60)",
@@ -315,11 +333,29 @@
       "ext": "bmp",
       "args": []
     },
+    "img-gif-static": {
+      "category": "image",
+      "label": "GIF — Static Image",
+      "ext": "gif",
+      "args": []
+    },
+    "img-tga": {
+      "category": "image",
+      "label": "TGA — Truevision Targa",
+      "ext": "tga",
+      "args": []
+    },
     "img-tiff": {
       "category": "image",
-      "label": "TIFF — Lossless",
+      "label": "TIFF — Lossless (LZW)",
       "ext": "tiff",
       "args": ["-compression_algo", "lzw"]
+    },
+    "img-tiff-uncompressed": {
+      "category": "image",
+      "label": "TIFF — Uncompressed",
+      "ext": "tiff",
+      "args": []
     },
     "img-ico": {
       "category": "image",
@@ -339,6 +375,18 @@
       "ext": "jpg",
       "args": ["-vf", "scale=min(3840\\,iw):min(2160\\,ih):force_original_aspect_ratio=decrease", "-q:v", "2"]
     },
+    "img-resize-720p": {
+      "category": "image",
+      "label": "JPEG — Resize to 720p (1280px max)",
+      "ext": "jpg",
+      "args": ["-vf", "scale=min(1280\\,iw):min(720\\,ih):force_original_aspect_ratio=decrease", "-q:v", "3"]
+    },
+    "img-resize-medium": {
+      "category": "image",
+      "label": "JPEG — Resize to Medium (800px max)",
+      "ext": "jpg",
+      "args": ["-vf", "scale=min(800\\,iw):min(800\\,ih):force_original_aspect_ratio=decrease", "-q:v", "3"]
+    },
     "img-resize-thumb": {
       "category": "image",
       "label": "JPEG — Thumbnail (320x240)",
@@ -351,11 +399,59 @@
       "ext": "jpg",
       "args": ["-vf", "crop=min(iw\\,ih):min(iw\\,ih),scale=512:512", "-q:v", "3"]
     },
+    "img-resize-avatar": {
+      "category": "image",
+      "label": "JPEG — Avatar (128x128)",
+      "ext": "jpg",
+      "args": ["-vf", "crop=min(iw\\,ih):min(iw\\,ih),scale=128:128", "-q:v", "2"]
+    },
     "img-grayscale": {
       "category": "image",
       "label": "Convert to Grayscale",
       "ext": "jpg",
       "args": ["-vf", "format=gray", "-q:v", "2"]
+    },
+    "img-invert": {
+      "category": "image",
+      "label": "Convert — Invert Colors (Negative)",
+      "ext": "jpg",
+      "args": ["-vf", "negate", "-q:v", "2"]
+    },
+    "img-blur": {
+      "category": "image",
+      "label": "Convert — Gaussian Blur",
+      "ext": "jpg",
+      "args": ["-vf", "gblur=sigma=3", "-q:v", "2"]
+    },
+    "img-sharpen": {
+      "category": "image",
+      "label": "Convert — Sharpen Image",
+      "ext": "jpg",
+      "args": ["-vf", "unsharp=5:5:1.0:5:5:0.0", "-q:v", "2"]
+    },
+    "img-brighten": {
+      "category": "image",
+      "label": "Convert — Brighten (+20%)",
+      "ext": "jpg",
+      "args": ["-vf", "eq=brightness=0.1", "-q:v", "2"]
+    },
+    "img-contrast": {
+      "category": "image",
+      "label": "Convert — Contrast Boost (+30%)",
+      "ext": "jpg",
+      "args": ["-vf", "eq=contrast=1.3", "-q:v", "2"]
+    },
+    "img-sepia": {
+      "category": "image",
+      "label": "Convert — Sepia Filter",
+      "ext": "jpg",
+      "args": ["-vf", "colorchannelmixer=0.393:0.769:0.189:0:0.349:0.686:0.168:0:0.272:0.534:0.131", "-q:v", "2"]
+    },
+    "img-vintage": {
+      "category": "image",
+      "label": "Convert — Vintage Curves",
+      "ext": "jpg",
+      "args": ["-vf", "curves=vintage", "-q:v", "2"]
     },
     "img-rotate-90-cw": {
       "category": "image",
