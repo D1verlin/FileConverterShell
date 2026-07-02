@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    FileConverter Setup — installs FFmpeg and registers the NileSoft Shell context menu.
+    FileConverter Setup - installs FFmpeg and registers the NileSoft Shell context menu.
 
 .DESCRIPTION
     1. Downloads portable FFmpeg (from GitHub releases) into ./tools/ffmpeg/
@@ -21,7 +21,7 @@ $ErrorActionPreference = 'Stop'
 
 Add-Type -AssemblyName System.Windows.Forms
 
-# ─── Paths ────────────────────────────────────────────────────────────────────
+# === Paths ====================================================================
 
 $ScriptDir      = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ToolsDir       = Join-Path $ScriptDir 'tools\ffmpeg'
@@ -32,7 +32,7 @@ $NilesoftImport = Join-Path $NilesoftDir 'imports\file-converter.nss'
 $LocalNss       = Join-Path $ScriptDir  'shell\file-converter.nss'
 $NilesoftExe    = Join-Path $NilesoftDir 'shell.exe'
 
-# ─── Helper functions ─────────────────────────────────────────────────────────
+# === Helper functions =========================================================
 
 function Write-Step([string]$Msg) {
     Write-Host "  $Msg" -ForegroundColor Cyan
@@ -52,15 +52,15 @@ function Abort([string]$Msg) {
     exit 1
 }
 
-# ─── Header ───────────────────────────────────────────────────────────────────
+# === Header ===================================================================
 
 Write-Host ''
-Write-Host '  ╔════════════════════════════════════════╗' -ForegroundColor Magenta
-Write-Host '  ║   FileConverter — Setup & Installer    ║' -ForegroundColor Magenta
-Write-Host '  ╚════════════════════════════════════════╝' -ForegroundColor Magenta
+Write-Host '  +----------------------------------------+' -ForegroundColor Magenta
+Write-Host '  |   FileConverter - Setup & Installer    |' -ForegroundColor Magenta
+Write-Host '  +----------------------------------------+' -ForegroundColor Magenta
 Write-Host ''
 
-# ─── Step 1: Check NileSoft Shell ─────────────────────────────────────────────
+# === Step 1: Check NileSoft Shell =============================================
 
 Write-Step 'Checking NileSoft Shell installation...'
 if (-not (Test-Path $NilesoftNss)) {
@@ -68,7 +68,7 @@ if (-not (Test-Path $NilesoftNss)) {
 }
 Write-OK "NileSoft Shell found at $NilesoftDir"
 
-# ─── Step 2: Download FFmpeg (if needed) ──────────────────────────────────────
+# === Step 2: Download FFmpeg (if needed) =====================================
 
 Write-Step 'Checking FFmpeg...'
 
@@ -152,7 +152,7 @@ if (Test-Path $FfmpegBin) {
     Write-OK "FFmpeg installed at: $FfmpegBin"
 }
 
-# ─── Step 3: Patch convert.ps1 with correct FFmpeg path ──────────────────────
+# === Step 3: Verify convert.ps1 ===============================================
 
 Write-Step 'Verifying convert.ps1 FFmpeg path...'
 
@@ -162,7 +162,7 @@ if (-not (Test-Path $ConvertScript)) {
 }
 Write-OK 'convert.ps1 found.'
 
-# ─── Step 4: Copy and patch file-converter.nss to NileSoft Shell imports ─────
+# === Step 4: Copy and patch file-converter.nss to NileSoft Shell imports =====
 
 Write-Step 'Installing and patching file-converter.nss into NileSoft Shell...'
 
@@ -182,7 +182,7 @@ try {
     Abort "Failed to install/patch file-converter.nss (you may need to run as Administrator): $_"
 }
 
-# ─── Step 5: Add import line to shell.nss ─────────────────────────────────────
+# === Step 5: Add import line to shell.nss =====================================
 
 Write-Step "Patching shell.nss to import file-converter.nss..."
 
@@ -201,7 +201,7 @@ if ($NssContent -match [regex]::Escape($ImportLine)) {
     }
 }
 
-# ─── Step 6: Restart NileSoft Shell ──────────────────────────────────────────
+# === Step 6: Restart NileSoft Shell ===========================================
 
 Write-Step 'Restarting NileSoft Shell to apply changes...'
 
@@ -214,16 +214,16 @@ try {
     Write-Host '         Please restart it manually: run shell.exe restart' -ForegroundColor Gray
 }
 
-# ─── Done ─────────────────────────────────────────────────────────────────────
+# === Done =====================================================================
 
 Write-Host ''
-Write-Host '  ╔════════════════════════════════════════╗' -ForegroundColor Green
-Write-Host '  ║   Setup complete!                      ║' -ForegroundColor Green
-Write-Host '  ╠════════════════════════════════════════╣' -ForegroundColor Green
-Write-Host '  ║  Right-click a video, audio, or image  ║' -ForegroundColor Green
-Write-Host '  ║  file in Explorer to see the new       ║' -ForegroundColor Green
-Write-Host '  ║  "Convert Video/Audio/Image" menus.    ║' -ForegroundColor Green
-Write-Host '  ╚════════════════════════════════════════╝' -ForegroundColor Green
+Write-Host '  +----------------------------------------+' -ForegroundColor Green
+Write-Host '  |   Setup complete!                      |' -ForegroundColor Green
+Write-Host '  +----------------------------------------+' -ForegroundColor Green
+Write-Host '  |  Right-click a video, audio, or image  |' -ForegroundColor Green
+Write-Host '  |  file in Explorer to see the new       |' -ForegroundColor Green
+Write-Host '  |  "Convert Video/Audio/Image" menus.    |' -ForegroundColor Green
+Write-Host '  +----------------------------------------+' -ForegroundColor Green
 Write-Host ''
 
 Read-Host 'Press Enter to close'
